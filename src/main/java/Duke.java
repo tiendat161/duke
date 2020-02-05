@@ -1,5 +1,4 @@
 import java.util.Scanner;
-// Level-1
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"

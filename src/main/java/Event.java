@@ -1,4 +1,14 @@
-package PACKAGE_NAME;
+public class Event extends Task {
 
-public class Event {
+    protected String on;
+
+    public Event(String description, String on) {
+        super(description);
+        this.on = on;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (on: " + this.on + ")";
+    }
 }

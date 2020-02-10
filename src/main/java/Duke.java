@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String line = "    ____________________________________________________________\n";
         System.out.println(line + "    Hello I'm Dat\n" + "    What can I do for you?\n" + line);
         Scanner sc = new Scanner(System.in);
@@ -19,27 +20,45 @@ public class Duke {
                 data.get(numOfTask - 1).markDone();
                 System.out.println("    Nice! I've marked this task as done: ");
                 System.out.println("      " + data.get(numOfTask - 1));
+            } else if (action[0].equals("delete")) {
+                int numOfTask = (int) Double.parseDouble(action[1]);
+                System.out.println("    Noted. I've removed this task: ");
+                System.out.println(data.get(numOfTask - 1));
+                data.remove(numOfTask - 1);
+                System.out.println("    Now you have " + data.size() + " tasks in the list.");
             } else {
                 String prefix = input.split(" ")[0];
                 switch (prefix) {
                     case "deadline": {
                         System.out.println("    Got it. I've added this task:");
                         String[] newTask = input.split("/by");
-                        data.add(new Deadline(newTask[0], newTask[1]));
+                        if (newTask[1] == null) {
+                            throw new EmptyArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        } else {
+                            data.add(new Deadline(newTask[0], newTask[1]));
+                        }
                         break;
                     }
                     case "event": {
-                        String[] newTask = input.split("/at");
-                        data.add(new Event(newTask[0], newTask[1]));
+                        try {
+                            String[] newTask = input.split("/at");
+                            data.add(new Event(newTask[0], newTask[1]));
+                        } catch(NoSuchElementException m) {
+                            System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+                        }
                         break;
                     }
                     case "todo": {
                         String[] newTask = input.split("todo ");
-                        data.add(new Todo(newTask[1]));
+                        if (newTask[1] == null) {
+                            throw new EmptyArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            data.add(new Todo(newTask[1]));
+                        }
                         break;
                     }
                     default: {
-                        data.add(new Task(input));
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
                 System.out.println(data.get(data.size() - 1));

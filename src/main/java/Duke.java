@@ -1,13 +1,19 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.io.File;
+
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         String line = "    ____________________________________________________________\n";
         System.out.println(line + "    Hello I'm Dat\n" + "    What can I do for you?\n" + line);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        ArrayList<Task> data = new ArrayList<>();
+
+        //ArrayList<Task> data = new ArrayList<>();
+        ArrayList<Task> data = new AccessHardDisk().readTasksFromFile();
+
         while (!input.equals("bye")) {
             System.out.print(line);
             String[] action = input.split(" ");
@@ -25,6 +31,7 @@ public class Duke {
                 System.out.println("    Noted. I've removed this task: ");
                 System.out.println(data.get(numOfTask - 1));
                 data.remove(numOfTask - 1);
+                new AccessHardDisk().saveFile(data);
                 System.out.println("    Now you have " + data.size() + " tasks in the list.");
             } else {
                 String prefix = input.split(" ")[0];
@@ -36,6 +43,7 @@ public class Duke {
                             throw new EmptyArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         } else {
                             data.add(new Deadline(newTask[0], newTask[1]));
+                            new AccessHardDisk().saveFile(data);
                         }
                         break;
                     }
@@ -43,6 +51,7 @@ public class Duke {
                         try {
                             String[] newTask = input.split("/at");
                             data.add(new Event(newTask[0], newTask[1]));
+                            new AccessHardDisk().saveFile(data);
                         } catch(NoSuchElementException m) {
                             System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                         }
@@ -54,6 +63,7 @@ public class Duke {
                             throw new EmptyArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
                         } else {
                             data.add(new Todo(newTask[1]));
+                            new AccessHardDisk().saveFile(data);
                         }
                         break;
                     }

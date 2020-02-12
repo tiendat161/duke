@@ -8,6 +8,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getTime() {
+        return this.on;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (on: " + this.on + ")";
     }

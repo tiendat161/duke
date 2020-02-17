@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -19,8 +21,12 @@ public class Task {
         return "Task";
     }
 
-    public String getTime() {
+    public String getTimeFormatted() {
         return "";
+    }
+
+    public LocalDate getTime() {
+        return LocalDate.parse("1998-01-16");
     }
 
     public String getStatusIcon() {

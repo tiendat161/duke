@@ -8,17 +8,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException, IOException {
-        String line = "    ____________________________________________________________\n";
-        System.out.println(line + "    Hello I'm Dat\n" + "    What can I do for you?\n" + line);
+
+    private Ui ui;
+    private AccessHardDisk storage;
+    ArrayList<Task> data;
+
+    public Duke(String filePath) throws DukeException {
+        ui = new Ui();
+        storage = new AccessHardDisk(filePath);
+        data = storage.readTasksFromFile();
+    }
+    public void run() throws IOException, DukeException {
+        ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        //ArrayList<Task> data = new ArrayList<>();
-        ArrayList<Task> data = new AccessHardDisk().readTasksFromFile();
-
         while (!input.equals("bye")) {
-            System.out.print(line);
+            ui.showLine();
             String[] action = input.split(" ");
             if (input.equals("list")) {
                 for (int i = 0; i <data.size(); i ++) {
@@ -27,7 +33,7 @@ public class Duke {
             } else if (action[0].equals("done")) {
                 int numOfTask = (int) Double.parseDouble(action[1]);
                 data.get(numOfTask - 1).markDone();
-                new AccessHardDisk().saveFile(data);
+                storage.saveFile(data);
                 System.out.println("    Nice! I've marked this task as done: ");
                 System.out.println("      " + data.get(numOfTask - 1));
             } else if (action[0].equals("delete")) {
@@ -35,7 +41,7 @@ public class Duke {
                 System.out.println("    Noted. I've removed this task: ");
                 System.out.println(data.get(numOfTask - 1));
                 data.remove(numOfTask - 1);
-                new AccessHardDisk().saveFile(data);
+                storage.saveFile(data);
                 System.out.println("    Now you have " + data.size() + " tasks in the list.");
             } else {
                 String prefix = input.split(" ")[0];
@@ -50,7 +56,7 @@ public class Duke {
                         } else {
                             LocalDate date = LocalDate.parse(time);
                             data.add(new Deadline(command.trim(), date));
-                            new AccessHardDisk().saveFile(data);
+                            storage.saveFile(data);
                         }
                         break;
                     }
@@ -61,7 +67,7 @@ public class Duke {
                             String command = newTask[0].substring("event".length());
                             LocalDate date = LocalDate.parse(time);
                             data.add(new Event(command.trim(), date));
-                            new AccessHardDisk().saveFile(data);
+                            storage.saveFile(data);
                         } catch(NoSuchElementException m) {
                             System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                         }
@@ -73,7 +79,7 @@ public class Duke {
                             throw new EmptyArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
                         } else {
                             data.add(new Todo(newTask[1].trim()));
-                            new AccessHardDisk().saveFile(data);
+                            storage.saveFile(data);
                         }
                         break;
                     }
@@ -84,9 +90,13 @@ public class Duke {
                 System.out.println(data.get(data.size() - 1));
                 System.out.println("    Now you have " + data.size() + " tasks in the list.");
             }
-            System.out.print(line);
+            ui.showLine();
             input = sc.nextLine();
         }
-        System.out.println(line + "    Bye. Hope to see you again soon!\n" + line);
+        ui.showBye();
+    }
+
+    public static void main(String[] args) throws DukeException, IOException {
+        new Duke("data/duke.txt").run();
     }
 }

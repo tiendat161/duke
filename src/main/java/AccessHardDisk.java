@@ -6,10 +6,11 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 public class AccessHardDisk {
-    String path = "./data/duke.txt";
+    String path;
     Scanner readFile;
-    public AccessHardDisk() {
+    public AccessHardDisk(String path) {
         try {
+            this.path = path;
             this.readFile = new Scanner(new File(path));
         } catch (FileNotFoundException error) {
             System.out.println(error);

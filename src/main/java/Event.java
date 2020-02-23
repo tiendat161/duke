@@ -5,9 +5,9 @@ public class Event extends Task {
 
     protected LocalDate time;
 
-    public Event(String description, LocalDate time) {
+    public Event(String description, String time) throws DukeException {
         super(description);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
     @Override

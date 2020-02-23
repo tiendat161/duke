@@ -5,9 +5,9 @@ public class Deadline extends Task {
 
     protected LocalDate time;
 
-    public Deadline(String description, LocalDate time) {
+    public Deadline(String description, String time) throws DukeException {
         super(description);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
     @Override

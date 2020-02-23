@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class UnknownCommand extends Command{
 
-public class UnknownCommand {
+    @Override
+    public void execute(TaskList tasks, AccessHardDisk storage) {
+        System.out.println("Unknown command, please try again");
+    }
 }

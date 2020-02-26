@@ -6,21 +6,38 @@ import duke.command.*;
 
 import java.util.ArrayList;
 
+/**
+ * A class to help handle all the logic of the programme
+ */
 public class Parser {
     protected TaskList tasks;
 
+    /**
+     * Constructor of a Parser object
+     * @param tasks     the Task List of the user
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Another Constructor of a Parser object, take an empty TaskList
+     */
     public Parser() {
         this.tasks = new TaskList();
     }
 
+    /**
+     * Another Constructor of a Parser object, take a given TaskList
+     */
     public Parser(ArrayList<Task> tasks) {
         this.tasks = new TaskList(tasks);
     }
 
+    /**
+     * Process command from user's CLI, recognize the type of command and its descriptions
+     * @param fullCommand   input from user's CLI
+     */
     public Command parse(String fullCommand) throws DukeException {
 
         if (fullCommand.toLowerCase().trim().equals("bye")) {

@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.util.AccessHardDisk;
+
 import java.io.IOException;
 import java.util.ArrayList;
 

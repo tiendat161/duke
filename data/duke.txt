@@ -1,4 +1,4 @@
-D|0|kill Batman|2020-01-01
+D|1|kill Batman|2020-01-01
 E|0|celebrate the death of Batman|2020-01-02
 T|1|kitnap Lara|1998-01-16
 T|0|contact Superman|1998-01-16

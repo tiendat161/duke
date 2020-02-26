@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.AccessHardDisk;
+
 import java.io.IOException;
 
 public class AddCommand extends Command {

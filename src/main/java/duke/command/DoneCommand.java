@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.util.*;
+import duke.task.*;
 import java.io.IOException;
 
 public class DoneCommand extends Command {

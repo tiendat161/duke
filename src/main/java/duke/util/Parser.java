@@ -13,6 +13,10 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    public Parser() {
+        this.tasks = new TaskList();
+    }
+
     public Parser(ArrayList<Task> tasks) {
         this.tasks = new TaskList(tasks);
     }
@@ -36,7 +40,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS! The argument of a 'done' command must be a number.");
             }
-            if (index <= 0 || index >= this.tasks.checkSize()) {
+            if (index <= 0 || index > this.tasks.checkSize()) {
                 throw new DukeException("☹ OOPS! The index of a 'done' command is out of bounce.");
             }
             return new DoneCommand(index);

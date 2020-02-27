@@ -7,17 +7,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Tasks that need to be done before a specific date.
  * Deadline extends class Task.
- * It is constructed with deadline, follows by a description
- * and /by with a DateTime in yyyy-mm-dd format in the command
+ * It is constructed with deadline, follows by a description.
+ * and /by with a DateTime in yyyy-mm-dd format in the command.
  */
 public class Deadline extends Task {
 
     protected LocalDate time;
 
     /**
-     * Constructs a Deadlines object
-     * @param description The activity description
-     * @param time    The date and time described in /by command
+     * Constructs a Deadlines object.
+     * @param description The activity description.
+     * @param time    The date and time described in /by command.
      */
     public Deadline(String description, String time) throws DukeException {
         super(description);
@@ -25,8 +25,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Show the type of the task. Return a String "D" represent deadline task
-     * @return "D"
+     * Show the type of the task. Return a String "D" represent deadline task.
+     * @return "D".
      */
     @Override
     public String getType() {
@@ -34,8 +34,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Show the time formatted of the task
-     * @return String represents DateTime in pattern MMM d yyyy
+     * Show the time formatted of the task.
+     * @return String represents DateTime in pattern MMM d yyyy.
      */
     @Override
     public String getTimeFormatted() {
@@ -43,8 +43,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Show the time of the task
-     * @return LocalDate time
+     * Show the time of the task.
+     * @return LocalDate time.
      */
     @Override
     public LocalDate getTime() {
@@ -52,8 +52,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Override toString() method
-     * @return String represents this object
+     * Override toString() method.
+     * @return String represents this object.
      */
     @Override
     public String toString() {

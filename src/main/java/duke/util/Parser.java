@@ -1,42 +1,52 @@
 package duke.util;
 
 import duke.exception.DukeException;
-import duke.task.*;
-import duke.command.*;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ShowCommand;
+import duke.command.DoneCommand;
+import duke.command.UnknownCommand;
 
 import java.util.ArrayList;
 
 /**
- * A class to help handle all the logic of the programme
+ * A class to help handle all the logic of the programme.
  */
 public class Parser {
     protected TaskList tasks;
 
     /**
-     * Constructor of a Parser object
-     * @param tasks     the Task List of the user
+     * Constructor of a Parser object.
+     * @param tasks     the Task List of the user.
      */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Another Constructor of a Parser object, take an empty TaskList
+     * Another Constructor of a Parser object, take an empty TaskList.
      */
     public Parser() {
         this.tasks = new TaskList();
     }
 
     /**
-     * Another Constructor of a Parser object, take a given TaskList
+     * Another Constructor of a Parser object, take a given TaskList.
      */
     public Parser(ArrayList<Task> tasks) {
         this.tasks = new TaskList(tasks);
     }
 
     /**
-     * Process command from user's CLI, recognize the type of command and its descriptions
-     * @param fullCommand   input from user's CLI
+     * Process command from user's CLI, recognize the type of command and its descriptions.
+     * @param fullCommand   input from user's CLI.
      */
     public Command parse(String fullCommand) throws DukeException {
 
@@ -95,8 +105,8 @@ public class Parser {
                 details = splitDescription[0];
                 time = splitDescription[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format for 'deadline' command requires a description " +
-                        "following by </by> notation and a due date.");
+                throw new DukeException("☹ OOPS!!! The format for 'deadline' command requires a description "
+                        + "following by </by> notation and a due date.");
             }
             return new AddCommand(new Deadline(details, time));
         }
@@ -113,8 +123,8 @@ public class Parser {
                 details = splitDescription[0];
                 time = splitDescription[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format for 'event' command requires a description " +
-                        "following by </at> notation and a date time.");
+                throw new DukeException("☹ OOPS!!! The format for 'event' command requires a description "
+                        + "following by </at> notation and a date time.");
             }
             return new AddCommand(new Event(details, time));
         }

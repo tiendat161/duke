@@ -3,12 +3,11 @@ import duke.task.TaskList;
 import duke.util.AccessHardDisk;
 import duke.util.Parser;
 import duke.util.Ui;
-import duke.command.*;
+import duke.command.Command;
 
 import java.io.IOException;
 
-/**
- * Duke class. The main class for project Duke
+/** Duke class. The main class for project Duke
  */
 public class Duke {
     private TaskList tasks;
@@ -16,8 +15,7 @@ public class Duke {
     private AccessHardDisk storage;
     private Parser parser;
 
-    /**
-     * Constructor for a Duke object.
+    /** Constructor for a Duke object.
      * @param path      the path to read and save from a .txt file
      */
     Duke(String path) throws DukeException {
@@ -27,8 +25,7 @@ public class Duke {
         this.parser = new Parser(tasks);
     }
 
-    /**
-     * Method to run a Duke Programme
+    /** Method to run a Duke Programme.
      */
     public void run() {
         System.out.println(ui.showWelcome());
@@ -48,8 +45,7 @@ public class Duke {
         }
     }
 
-    /**
-     * main method of the programme
+    /** Main method of the programme.
      */
     public static void main(String[] args) throws IOException, DukeException {
         Duke duke = new Duke("./data/duke.txt");

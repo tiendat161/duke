@@ -1,18 +1,8 @@
 package duke.util;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ShowCommand;
-import duke.command.DoneCommand;
-import duke.command.UnknownCommand;
+import duke.task.*;
 
 import java.util.ArrayList;
 
@@ -127,6 +117,14 @@ public class Parser {
                         + "following by </at> notation and a date time.");
             }
             return new AddCommand(new Event(details, time));
+        }
+
+        if (action[0].toLowerCase().trim().equals("find")) {
+            if (action.length == 1) {
+                throw new DukeException("☹ OOPS! The description of a 'find' command is missing.");
+            }
+            String keyWord = fullCommand.split(" ", 2)[1];
+            return new FindCommand(keyWord);
         }
 
         return new UnknownCommand();

@@ -97,4 +97,31 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
+
+    /**
+     * Print the list of all the tasks match the keyWord of FindCommand.
+     */
+    public void findTask(String keyWord) {
+        keyWord = keyWord.trim().toLowerCase();
+        int j = 1;
+        boolean isFound = false;
+        int count = 0;
+        for (Task task : this.tasks) {
+            if (task.description.trim().toLowerCase().contains(keyWord)) {
+                isFound = true;
+                count ++;
+            }
+        }
+        if (isFound) {
+            System.out.println("      Great, I have found " + count + " tasks that match your keyword: ");
+            for (Task task : this.tasks) {
+                if (task.description.trim().toLowerCase().contains(keyWord)) {
+                    System.out.println("     " + j + ": " + task);
+                }
+                j++;
+            }
+        } else {
+            System.out.println("      Sorry, I didn't find any results that match your keyword");
+        }
+    }
 }

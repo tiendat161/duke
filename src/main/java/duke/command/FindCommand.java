@@ -3,8 +3,6 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.AccessHardDisk;
 
-import java.io.IOException;
-
 /** An addCommand, handle whenever the user wants to add a new Task.
  */
 public class FindCommand extends Command {
@@ -18,12 +16,12 @@ public class FindCommand extends Command {
     }
 
     /** Override abstract method of Command Class.
-     * execute an AddCommand.
+     * execute an FindCommand.
      * @param tasks     the user's TaskList.
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {
+    public void execute(TaskList tasks, AccessHardDisk storage) {
         tasks.findTask(this.keyWord);
     }
 }

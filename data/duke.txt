@@ -1,6 +1,6 @@
-T|0|Kill Batman|1998-01-16
+T|1|Kill Batman|1998-01-16
 D|0|Kill Batman|2020-02-02
-E|0|Celebrate Batman's death|2020-03-03
+E|1|Celebrate Batman's death|2020-03-03
 D|0|negociate with SuperMan|2020-03-02
 D|0|kidnap Lara|2020-03-01
 T|1|get Kriptonite|1998-01-16

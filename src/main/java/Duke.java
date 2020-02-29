@@ -4,7 +4,6 @@ import duke.task.TaskList;
 import duke.util.AccessHardDisk;
 import duke.util.Parser;
 import duke.util.Ui;
-import duke.util.DialogBox;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,16 +19,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
 import java.io.IOException;
 
 /** Duke class. The main class for project Duke
  */
-public class Duke extends Application {
+public class Duke {
 
     private TaskList tasks;
     private Ui ui;
@@ -63,7 +57,7 @@ public class Duke extends Application {
         ui = new Ui();
         this.parser = new Parser(tasks);
     }
-
+    /*
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -135,6 +129,7 @@ public class Duke extends Application {
             handleUserInput();
         });
     }
+     */
 
     /**
      * Iteration 1:
@@ -155,6 +150,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    /*
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -164,12 +160,13 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
+     */
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 

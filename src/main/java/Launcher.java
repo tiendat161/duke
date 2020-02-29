@@ -5,7 +5,7 @@ public class Launcher {
     /** Main method of the programme.
      */
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
         //System.out.println("New version!");
         //Duke duke = new Duke("./data/duke.txt");
         //duke.run();

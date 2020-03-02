@@ -13,7 +13,7 @@ public class ShowCommand extends Command {
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) {
-        tasks.showTaskList();
+    public String execute(TaskList tasks, AccessHardDisk storage) {
+        return tasks.showTaskList();
     }
 }

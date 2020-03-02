@@ -1,6 +1,8 @@
-T|1|Kill Batman|1998-01-16
-D|0|Kill Batman|2020-02-02
-E|1|Celebrate Batman's death|2020-03-03
-D|0|negociate with SuperMan|2020-03-02
-D|0|kidnap Lara|2020-03-01
-T|1|get Kriptonite|1998-01-16
+E|0|go to school|12-12-2020
+T|1|kill Superman|
+D|0|go wash yourself|12-12-2020
+E|0|go party|12-12-2020
+T|0|go kill Batman|
+T|1|never do anything|
+T|1|ignore friend messages|
+T|1|ignore team project|

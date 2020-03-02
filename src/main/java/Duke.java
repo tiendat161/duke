@@ -1,5 +1,6 @@
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.EmptyArgumentException;
 import duke.task.TaskList;
 import duke.util.AccessHardDisk;
 import duke.util.Parser;
@@ -29,6 +30,7 @@ public class Duke {
     private Ui ui;
     private AccessHardDisk storage;
     private Parser parser;
+    boolean isExit = false;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -167,12 +169,50 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return run(input);
     }
 
     /** Method to run a Duke Programme.
      */
-    public void run() {
+    public String run(String fullCommand) {
+        try {
+            Command c = parser.parse(fullCommand);
+            if (c.isExit()) {
+                this.isExit = true;
+            }
+            return (c.execute(tasks, storage));
+        } catch (IOException | DukeException e) {
+            return (ui.showError(e.getMessage()));
+        }
+    }
+
+    /** Method to run a Duke Programme.
+     */
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public String getWelcomeMessage() {
+        return this.ui.showWelcome();
+    }
+
+    public String getGoodbyeMessage() {
+        return this.ui.showGoodbye();
+    }
+
+    public String getReminder() {
+        String message = "";
+        message = "Currently you have "
+                + String.valueOf(this.tasks.checkSize())
+                + " tasks in the list" + "\n"
+                + this.tasks.showTaskList();
+        return message;
+    }
+
+}
+
+/*
+public void run() {
         System.out.println(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
@@ -180,7 +220,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 System.out.println(ui.showLine()); // show the divider line ("_______")
                 Command c = parser.parse(fullCommand);
-                c.execute(tasks, storage);
+                System.out.println(c.execute(tasks, storage));
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {
                 System.out.println(ui.showError(e.getMessage()));
@@ -189,4 +229,4 @@ public class Duke {
             }
         }
     }
-}
+ */

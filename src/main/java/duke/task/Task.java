@@ -54,8 +54,8 @@ public class Task {
      * Get the time of the task (no time for this parent class).
      * @return a dummy timing.
      */
-    public LocalDate getTime() {
-        return LocalDate.parse("1998-01-16");
+    public String getTime() {
+        return "";
     }
 
     /**

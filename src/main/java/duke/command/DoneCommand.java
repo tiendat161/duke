@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {
-        tasks.markDone(index, storage);
+    public String execute(TaskList tasks, AccessHardDisk storage) throws IOException {
+        return tasks.markDone(index, storage);
     }
 }

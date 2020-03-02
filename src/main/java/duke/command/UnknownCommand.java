@@ -15,7 +15,7 @@ public class UnknownCommand extends Command {
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) {
-        System.out.println("Unknown command, please try again");
+    public String execute(TaskList tasks, AccessHardDisk storage) {
+        return ("Unknown command, please try again");
     }
 }

@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exception.DukeException;
+
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,6 +13,7 @@ import java.time.format.DateTimeFormatter;
  * and /at with a DateTime in yyyy-mm-dd format in the command.
  */
 public class Event extends Task {
+    private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     protected LocalDate time;
 
@@ -19,9 +22,15 @@ public class Event extends Task {
      * @param description The activity description.
      * @param time    The date and time described in /at command.
      */
-    public Event(String description, String time) throws DukeException {
+    public Event(String description, String time) throws DateTimeException, DukeException {
         super(description);
-        this.time = LocalDate.parse(time);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            this.time = LocalDate.parse(time, formatter);
+        } catch (DateTimeException e) {
+            throw new DukeException("It seems that your event date "
+                    + "is not properly formatted. The date should be in form of 'dd-MM-yyyy");
+        }
     }
 
     /**
@@ -47,9 +56,9 @@ public class Event extends Task {
      * @return LocalDate time.
      */
     @Override
-    public LocalDate getTime() {
-        return this.time;
-    }
+    public String getTime() {
+        return this.time.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+}
 
     /**
      * Override toString() method.

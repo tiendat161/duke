@@ -24,7 +24,7 @@ public class AddCommand extends Command {
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {
-        tasks.addTask(task, storage);
+    public String execute(TaskList tasks, AccessHardDisk storage) throws IOException {
+        return tasks.addTask(task, storage);
     }
 }

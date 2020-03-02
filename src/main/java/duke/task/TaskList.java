@@ -41,11 +41,11 @@ public class TaskList {
      * @param n         the index number of the task.
      * @param storage   storage that access hard disk to save any changes.
      */
-    public void markDone(int n, AccessHardDisk storage) throws IOException {
+    public String markDone(int n, AccessHardDisk storage) throws IOException {
         tasks.get(n - 1).markDone();
         storage.saveFile(this);
-        System.out.println("    Nice! I've marked this task as done: ");
-        System.out.println("      " + tasks.get(n - 1));
+        return("Nice! I've marked this task as done: ")
+                + tasks.get(n - 1);
     }
 
     /**
@@ -53,11 +53,11 @@ public class TaskList {
      * @param n         the index number of the task.
      * @param storage   storage that access hard disk to save any changes.
      */
-    public void delete(int n, AccessHardDisk storage) throws IOException {
+    public String delete(int n, AccessHardDisk storage) throws IOException {
         Task removedTask = tasks.remove(n - 1);
         storage.saveFile(this);
-        System.out.println("    Noted. I've removed this task: ");
-        System.out.println("      " + removedTask);
+        return ("Noted. I've removed this task: ")
+                + removedTask;
     }
 
     /**
@@ -65,11 +65,11 @@ public class TaskList {
      * @param task      the task that need to be added.
      * @param storage   storage that access hard disk to save any changes.
      */
-    public void addTask(Task task, AccessHardDisk storage) throws IOException {
+    public String addTask(Task task, AccessHardDisk storage) throws IOException {
         this.tasks.add(task);
         storage.saveFile(this);
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("     " + this.tasks.size() + ": " + task);
+        return ("Got it. I've added this task:")
+                + this.tasks.size() + ": " + task;
     }
 
     /**
@@ -83,12 +83,14 @@ public class TaskList {
     /**
      * Print all the task in the list in order.
      */
-    public void showTaskList() {
+    public String showTaskList() {
         int i = 1;
+        String string = "";
         for (Task task : this.tasks) {
-            System.out.println("     " + i + ": " + task);
+            string += ("     " + i + ": " + task) + "\n";
             i++;
         }
+        return string;
     }
 
     /**
@@ -101,7 +103,7 @@ public class TaskList {
     /**
      * Print the list of all the tasks match the keyWord of FindCommand.
      */
-    public void findTask(String keyWord) {
+    public String findTask(String keyWord) {
         keyWord = keyWord.trim().toLowerCase();
         int j = 1;
         boolean isFound = false;
@@ -112,16 +114,18 @@ public class TaskList {
                 count ++;
             }
         }
+        String string = "";
         if (isFound) {
-            System.out.println("      Great, I have found " + count + " tasks that match your keyword: ");
+            string += ("Great, I have found " + count + " tasks that match your keyword: " + "\n");
             for (Task task : this.tasks) {
                 if (task.description.trim().toLowerCase().contains(keyWord)) {
-                    System.out.println("     " + j + ": " + task);
+                    string += (" " + j + ": " + task + "\n");
                 }
                 j++;
             }
         } else {
-            System.out.println("      Sorry, I didn't find any results that match your keyword");
+            string += ("Sorry, I didn't find any results that match your keyword");
         }
+        return string;
     }
 }

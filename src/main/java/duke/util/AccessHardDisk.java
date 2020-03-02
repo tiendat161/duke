@@ -71,7 +71,7 @@ public class AccessHardDisk {
             int binaryInx = (task.isDone()) ? 1 : 0;
             pw.println(task.getType()
                     + "|" + binaryInx + "|" + task.getDescription()
-                    + "|" + task.getTime().toString());
+                    + "|" + task.getTime());
         }
         pw.close();
     }

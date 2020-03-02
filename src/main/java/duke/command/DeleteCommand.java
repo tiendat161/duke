@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param storage   the storage to save any changes.
      */
     @Override
-    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {
-        tasks.delete(index, storage);
+    public String execute(TaskList tasks, AccessHardDisk storage) throws IOException {
+        return tasks.delete(index, storage);
     }
 }

@@ -2,8 +2,10 @@ package duke.util;
 
 import duke.command.*;
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskException;
 import duke.task.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +43,6 @@ public class Parser {
     public Command parse(String fullCommand) throws DukeException {
 
         if (fullCommand.toLowerCase().trim().equals("bye")) {
-            System.out.println("Goodbye! See you soon!");
             return new ExitCommand();
         }
 
@@ -51,14 +52,17 @@ public class Parser {
         String[] action = fullCommand.split(" ");
 
         if (action[0].toLowerCase().trim().equals("done")) {
+            if (action.length == 1) {
+                throw  new DukeException("The 'done' command is missing a number argument.");
+            }
             int index = 0;
             try {
                 index = Integer.parseInt(action[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS! The argument of a 'done' command must be a number.");
+                throw new DukeException("OOPS! The argument of a 'done' command must be a number.");
             }
             if (index <= 0 || index > this.tasks.checkSize()) {
-                throw new DukeException("☹ OOPS! The index of a 'done' command is out of bounce.");
+                throw new DukeException("OOPS! The index of a 'done' command is out of bounce.");
             }
             return new DoneCommand(index);
         }
@@ -78,7 +82,7 @@ public class Parser {
 
         if (action[0].toLowerCase().trim().equals("todo")) {
             if (action.length == 1) {
-                throw new DukeException("☹ OOPS! The description of a 'todo' command is missing.");
+                throw new DukeException("The description of a 'todo' command is missing.");
             }
             return new AddCommand(new Todo(fullCommand.split(" ", 2)[1]));
         }
@@ -87,7 +91,7 @@ public class Parser {
             String time;
             String details;
             if (action.length == 1) {
-                throw new DukeException("☹ OOPS! The description of a 'deadline' command is missing.");
+                throw new DukeException("The description of a 'deadline' command is missing.");
             }
             String description = fullCommand.split(" ", 2)[1];
             String[] splitDescription = description.split(" /by ");
@@ -95,7 +99,7 @@ public class Parser {
                 details = splitDescription[0];
                 time = splitDescription[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format for 'deadline' command requires a description "
+                throw new DukeException("The format for 'deadline' command requires a description "
                         + "following by </by> notation and a due date.");
             }
             return new AddCommand(new Deadline(details, time));
@@ -105,7 +109,7 @@ public class Parser {
             String time;
             String details;
             if (action.length == 1) {
-                throw new DukeException("☹ OOPS! The description of a 'event' command is missing.");
+                throw new DukeException("The description of a 'event' command is missing.");
             }
             String description = fullCommand.split(" ", 2)[1];
             String[] splitDescription = description.split(" /at ");
@@ -113,7 +117,7 @@ public class Parser {
                 details = splitDescription[0];
                 time = splitDescription[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format for 'event' command requires a description "
+                throw new DukeException("The format for 'event' command requires a description "
                         + "following by </at> notation and a date time.");
             }
             return new AddCommand(new Event(details, time));
@@ -121,7 +125,7 @@ public class Parser {
 
         if (action[0].toLowerCase().trim().equals("find")) {
             if (action.length == 1) {
-                throw new DukeException("☹ OOPS! The description of a 'find' command is missing.");
+                throw new DukeException("The description of a 'find' command is missing.");
             }
             String keyWord = fullCommand.split(" ", 2)[1];
             return new FindCommand(keyWord);

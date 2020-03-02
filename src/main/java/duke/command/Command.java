@@ -19,5 +19,5 @@ public abstract class Command {
      * @param storage    the storage to save any changes.
      * @param tasks      the user's TaskList.
      */
-    public abstract void execute(TaskList tasks, AccessHardDisk storage) throws IOException;
+    public abstract String execute(TaskList tasks, AccessHardDisk storage) throws IOException;
 }

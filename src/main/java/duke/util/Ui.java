@@ -1,5 +1,4 @@
 package duke.util;
-
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,6 @@ public class Ui {
 
     /**
      * A method to print a line.
-     *
      * @return a line in string format.
      */
     public String showLine() {
@@ -24,7 +22,6 @@ public class Ui {
 
     /**
      * A method to print a welcome message.
-     *
      * @return in string format.
      */
     public String showWelcome() {
@@ -35,7 +32,6 @@ public class Ui {
 
     /**
      * A method to print a goodbye message.
-     *
      * @return in string format.
      */
     public String showGoodbye() {
@@ -45,7 +41,6 @@ public class Ui {
 
     /**
      * A method to print an error message.
-     *
      * @return in string format.
      */
     public String showError(String errorMessage) {

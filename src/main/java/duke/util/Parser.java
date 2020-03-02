@@ -2,10 +2,8 @@ package duke.util;
 
 import duke.command.*;
 import duke.exception.DukeException;
-import duke.exception.InvalidTaskException;
 import duke.task.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +39,6 @@ public class Parser {
      * @param fullCommand   input from user's CLI.
      */
     public Command parse(String fullCommand) throws DukeException {
-
         if (fullCommand.toLowerCase().trim().equals("bye")) {
             return new ExitCommand();
         }
@@ -62,8 +59,9 @@ public class Parser {
                 throw new DukeException("OOPS! The argument of a 'done' command must be a number.");
             }
             if (index <= 0 || index > this.tasks.checkSize()) {
-                throw new DukeException("OOPS! The index of a 'done' command is out of bounce.");
+                throw new DukeException("The index of a 'done' command is out of bounce.");
             }
+            assert index > this.tasks.checkSize() : "The 'done' command task index is out of bounce (high)";
             return new DoneCommand(index);
         }
 
@@ -72,11 +70,12 @@ public class Parser {
             try {
                 index = Integer.parseInt(action[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS! The argument of a 'delete' command must be a number.");
+                throw new DukeException("The argument of a 'delete' command must be a number.");
             }
             if (index <= 0 || index > this.tasks.checkSize()) {
-                throw new DukeException("☹ OOPS! The index of a 'delete' command is out of bounce.");
+                throw new DukeException("The index of a 'delete' command is out of bounce.");
             }
+            assert index > this.tasks.checkSize() : "The 'delete' command task index is out of bounce (high)";
             return new DeleteCommand(index);
         }
 
@@ -84,6 +83,7 @@ public class Parser {
             if (action.length == 1) {
                 throw new DukeException("The description of a 'todo' command is missing.");
             }
+            assert fullCommand.split(" ", 2)[1] != null : "The 'todo' command description is missing ";
             return new AddCommand(new Todo(fullCommand.split(" ", 2)[1]));
         }
 
@@ -102,6 +102,7 @@ public class Parser {
                 throw new DukeException("The format for 'deadline' command requires a description "
                         + "following by </by> notation and a due date.");
             }
+            assert time != null: "Timing is invalid to pass to AddCommand";
             return new AddCommand(new Deadline(details, time));
         }
 
@@ -120,6 +121,7 @@ public class Parser {
                 throw new DukeException("The format for 'event' command requires a description "
                         + "following by </at> notation and a date time.");
             }
+            assert time != null: "Timing is invalid to pass to AddCommand";
             return new AddCommand(new Event(details, time));
         }
 
@@ -128,6 +130,7 @@ public class Parser {
                 throw new DukeException("The description of a 'find' command is missing.");
             }
             String keyWord = fullCommand.split(" ", 2)[1];
+            assert keyWord != null: "find command is missing a keyword";
             return new FindCommand(keyWord);
         }
 

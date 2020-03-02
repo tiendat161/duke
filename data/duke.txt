@@ -1,8 +1,8 @@
-E|0|go to school|12-12-2020
+E|1|go to school|12-12-2020
 T|1|kill Superman|
-D|0|go wash yourself|12-12-2020
-E|0|go party|12-12-2020
+D|1|go wash yourself|12-12-2020
+E|1|go party|12-12-2020
 T|0|go kill Batman|
 T|1|never do anything|
 T|1|ignore friend messages|
-T|1|ignore team project|
+T|0|CS2103 homework|

@@ -31,10 +31,14 @@ public class AccessHardDisk {
      */
     public AccessHardDisk(String path) {
         try {
-            this.readFile = new Scanner(new File(this.path = path));
-        } catch (FileNotFoundException error) {
-            System.out.println(error);
-            System.exit(0);
+            File savedFile = new File(path);
+            if (!savedFile.exists()) {
+                savedFile.getParentFile().mkdirs();
+                savedFile.createNewFile();
+            }
+            this.readFile = new Scanner(savedFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

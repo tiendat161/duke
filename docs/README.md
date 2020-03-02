@@ -21,7 +21,7 @@ A User can simply **add**, **delete** or **markdone** a task via specific comman
 ## Features 
 ### Simple Graphic User Interface
 Duke chatHub comes with a simple GUI to run and process commands .
-<img src = "Ui.png" width = "250"
+<img src = "Ui.png" width = "250">
 
 ## Usage
 ### Add a task 

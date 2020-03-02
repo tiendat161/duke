@@ -1,8 +1,8 @@
-E|1|go to school|12-12-2020
-T|1|kill Superman|
-D|1|go wash yourself|12-12-2020
-E|1|go party|12-12-2020
-T|0|go kill Batman|
-T|1|never do anything|
-T|1|ignore friend messages|
-T|0|CS2103 homework|
+E|1|Record: sleep for 12 hours|01-03-2020
+T|1|Go play League of Legends|
+T|1|Never do anything work during recess week|
+T|1|Ignore team project messages|
+T|0|Do CS2103 homework|
+T|1|Do CS2103 project|
+T|0|Do CS2103 web-cast|
+E|0|prepare for project meeting|04-03-2020

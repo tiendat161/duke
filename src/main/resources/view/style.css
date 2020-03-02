@@ -1,0 +1,9 @@
+.root {
+    -fx-font-size: 15pt;
+    -fx-font-family: "fantasy";
+    -fx-focus-color: #FFA500;
+    -fx-background-color: #F0000;
+}
+.userInput {
+    -fx-focus-color: #FFA500;
+}

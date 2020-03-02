@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    protected String line = "______________________________________________________\n";
+    protected String line = "____________________________________________\n";
     protected Scanner sc = new Scanner(System.in);
 
     public Ui() {

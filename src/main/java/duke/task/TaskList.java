@@ -5,6 +5,8 @@ import duke.util.AccessHardDisk;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Contains a list of tasks. It is a collection of current tasks.
@@ -44,7 +46,7 @@ public class TaskList {
     public String markDone(int n, AccessHardDisk storage) throws IOException {
         tasks.get(n - 1).markDone();
         storage.saveFile(this);
-        return("Nice! I've marked this task as done: ")
+        return("Nice! I've marked this task as done:\n")
                 + tasks.get(n - 1);
     }
 
@@ -56,7 +58,7 @@ public class TaskList {
     public String delete(int n, AccessHardDisk storage) throws IOException {
         Task removedTask = tasks.remove(n - 1);
         storage.saveFile(this);
-        return ("Noted. I've removed this task: ")
+        return ("Noted. I've removed this task:\n")
                 + removedTask;
     }
 
@@ -68,7 +70,7 @@ public class TaskList {
     public String addTask(Task task, AccessHardDisk storage) throws IOException {
         this.tasks.add(task);
         storage.saveFile(this);
-        return ("Got it. I've added this task:")
+        return ("Got it. I've added this task:\n")
                 + this.tasks.size() + ": " + task;
     }
 
@@ -124,8 +126,16 @@ public class TaskList {
                 j++;
             }
         } else {
-            string += ("Sorry, I didn't find any results that match your keyword");
+            string += ("Sorry, I didn't find any results that match your keyword\n");
         }
         return string;
     }
+
+    public String sort(Comparator<Task> comparator, AccessHardDisk storage) throws IOException {
+        Collections.sort(this.tasks, comparator);
+        storage.saveFile(this);
+        return ("Got it. I've sort based on your request:") + "\n"
+                + this.showTaskList();
+    }
+
 }
